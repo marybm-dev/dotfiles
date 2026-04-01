@@ -1,6 +1,5 @@
-##BASH##
-alias brc='vi ~/.bashrc;'
-alias bp='vi ~/.bash_profile;'
+##SHELL##
+alias zrc='vi ~/.zshrc;'
 alias lls='ls -la'
 
 ##GO##
@@ -46,17 +45,23 @@ alias gla="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 ##PIP##
 alias pipi='pip install'
 
-##BASH GIT PROMPT##
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR="$(brew --prefix)/opt/bash-git-prompt/share"
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-fi
+##COMPLETION##
+autoload -Uz compinit && compinit
 
-##GIT AUTOCOMPLETE##
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+##GIT PROMPT##
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' (%b)'
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n@%m%f %F{blue}%~%f%F{yellow}${vcs_info_msg_0_}%f %# '
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+##PYTHON##
+PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}"
+
+##NODE##
+export PATH="/usr/local/opt/node@22/bin:$PATH"
+
+##CARGO##
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
 export PATH="$HOME/.local/bin:$PATH"
