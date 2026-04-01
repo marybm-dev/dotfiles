@@ -1,7 +1,15 @@
-# source bashrc so I only have to maintain one file
+# Source bashrc so I only have to maintain one file
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+[ -f ~/.profile ] && source ~/.profile
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Python
+PATH="/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}"
+export PATH
+
+# Node
+export PATH="/usr/local/opt/node@22/bin:$PATH"
+
+# Cargo
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
